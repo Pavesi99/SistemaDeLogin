@@ -42,8 +42,8 @@
                           
                       </div>
                       <div class="form-group">
-                       <div class="custum-control custom-checkbox">
-                           <input type="checkbox" name="lembrar" id="checkLembrar" class="custum-control-input" >
+                       <div class="custom-control custom-checkbox">
+                           <input type="checkbox" name="lembrar" id="checkLembrar" class="custom-control-input" >
                            <label for="checkLembrar" class="custom-control-label">
                                   Lembrar de mim.
                            </label>
