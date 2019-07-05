@@ -225,7 +225,7 @@
                 }
          });
          //Envio de dados via Ajax
-         //Sem recerregar a página
+         //Pagina Registro de Usuario
      $("#btnRegistroUsuario").click(function(e){
         if(document.querySelector("#formRegistro").checkValidity()){
         //Não deixa o formulario ser enviado
@@ -233,14 +233,60 @@
          $.ajax({
              url:'recebe.php',
              method:'post',
-                data:$("#formRegistro").seriali'ze()+'&action=registro',
+                data:$("#formRegistro").serialize()+'&action=registro',
                 success:function(resposta){
                     $('#alerta').show();
                     $('#resultado').html(resposta);
                 }
          });
      }
+     return true;
      });
+     //Fim do Ajax registro
+     
+     //Envio de dados via Ajax
+         //Pagina Entrar
+     $("#btnEntrar").click(function(e){
+        if(document.querySelector("#formLogin").checkValidity()){
+        //Não deixa o formulario ser enviado
+         e.preventDefault();
+         $.ajax({
+             url:'recebe.php',
+             method:'post',
+                data:$("#formLogin").serialize()+'&action=entrar',
+                success:function(resposta){
+                    $('#alerta').show();
+                    $('#resultado').html(resposta);
+                }
+         });
+     }
+     return true;
+     });
+          //Fim do Ajax Entrar
+          
+          
+           //Envio de dados via Ajax
+         //Pagina Gerar senha
+     $("#btnGerar").click(function(e){
+        if(document.querySelector("#formSenha").checkValidity()){
+        //Não deixa o formulario ser enviado
+         e.preventDefault();
+         $.ajax({
+             url:'recebe.php',
+             method:'post',
+                data:$("#formSenha").serialize()+'&action=senha',
+                success:function(resposta){
+                    $('#alerta').show();
+                    $('#resultado').html(resposta);
+                }
+         });
+     }
+     return true;
+     });
+          //Fim do Ajax Gerar Senha
+     
+     
+     
      /*
 * Tradução padrao do jQuery
 * Locale: PT_BR
