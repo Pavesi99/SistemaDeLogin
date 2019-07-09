@@ -128,6 +128,7 @@
                       <!-- Campo Senha -->
                       <div class="form-group">
                           <input type="password" id="senhaUsuario"
+                                 name="senhaUsuario"
                                  class="form-control"
                                  placeholder="Senha" required
                                  minlength="6">
