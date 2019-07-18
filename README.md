@@ -5,6 +5,15 @@ Aula de Introdução à Prog. Web - Criação de um sistema de Login
 Leiaute Bootstrap
 
 ## aula02 - 13 de junho de 2019
+desenvolvimento
+Formulários e  ~~validação~~
+
+## aula03 - 27 de junho de 2019
+Mostrar e esconder formúlario
+
+## aula04 - 04 de julho de 2019
+Validação com jQuery e envio de dados com Ajax.~~Recepção com PHP~~
+
 Formulários e ~~validação~~
 
 ## aula03 - 27 de junho de 2019
@@ -18,4 +27,4 @@ dados com Ajax. ~~Recepção com PHP~~
 Cadastro de usuário no banco de dados
 
 ##Aula06 - 11 de julho de 2019
-Verificação de login e pagina de perfil
+Verificação de login e pagina de perfil 

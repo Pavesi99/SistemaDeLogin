@@ -1,3 +1,8 @@
+
+<?php
+
+var_dump($_POST);
+
 <?php //início de um script PHP
  session_start();//inicialização da sessão
  //Memória de Login entre todos as páginas
