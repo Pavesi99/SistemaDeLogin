@@ -14,10 +14,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <!-- CSS jQuert Validate -->
-    <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
-
     
     <!-- CSS jQuery Validate -->
     <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
@@ -59,7 +55,9 @@
                           <input type="text" name="nomeUsuario"
                                  class="form-control"
                                  placeholder="Nome do usuário"
-                                 required minlength="5">
+                                 required minlength="5"
+                                 value="<?php if (isset($_COOKIE['nomeUsuario']))
+                                     {echo $_COOKIE['nomeUsuario'];}?>">
                       </div>
                       
                       <div class="form-group">
@@ -67,23 +65,24 @@
                                  name="senhaUsuario"
                                  class="form-control"
                                  placeholder="Senha"
-                                 required minlength="6">
+                                 required minlength="6"
+                                 value= "<?php 
+                                 if (isset($_COOKIE['senhaUsuario']))
+                                     {echo $_COOKIE['senhaUsuario'];}
+                                     ?>">
                       </div>
-
-                      <div class="form-group mt-5">
-                       <div class="custom-control custom-checkbox">
-                           <input type="checkbox" name="lembrar" id="checkLembrar" class="custom-control-input" >
-                           <label for="checkLembrar" class="custom-control-label">
-
                       
                       <div class="form-group mt-5">
                           <div class="custom-control custom-checkbox">
                               <input type="checkbox" name="lembrar"
                                      id="checkLembrar" 
-                                     class="custom-control-input">
+                                     class="custom-control-input" 
+                                     <?php 
+                                 if (isset($_COOKIE['senhaUsuario']))
+                                     {echo 'checked';}
+                                     ?>>
                               <label for="checkLembrar" 
                                      class="custom-control-label">
-
                                   Lembrar de mim.
                               </label>
                               <a href="#" id="btnEsqueci" class="float-right">
@@ -174,56 +173,7 @@
                                 <a href="#">termos e condições.</a>
                             </label>
                           </div>
-
-                              
-                              <!-- Campo E-mail -->
-                              <div class="form-group">
-                                  <input type="email" name="emailUsuario" class="form-control" placeholder="E-mail"
-                                         required>
-                              </div>
-                              
-                              <!-- Campo Senha -->
-                              <div class="form-group">
-                                  <input type="password" id="senhaUsuario" class="form-control" placeholder="Senha" 
-                                         required minlength="6">
-                              </div>
-                              
-                              <!-- Campo de confirmação de senha -->
-                              <div class="form-group">
-                                  <input type="password" id="senhaUsuarioConfirmar" class="form-control" placeholder="Confirmar a Senha"
-                                         required minlength="6">
-                              </div>
-                              <!-- CheckBox de aceite os termos -->
-                              <div class="form-group mt-5">
-                                  <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" name="concordar" class="custom-control-input" id="checkConcordar">
-                                  <label for="checkConcordar" class="custom-control-label" >
-                                      Eu concordo com os 
-                                      <a href="#"> TERMOS E CONDIÇÕES.</a>
-                                  </label>
-                                  </div>
-                              </div>
-                              <!-- Botao enviar -->
-                              
-                              <div class="form-group">
-                                  <input type="submit" name="btnRegistroUsuario" id="btnRegistroUsuario" value=" ++ Registrar ++"
-                                         class="btn btn-primary btn-block">
-                              </div>
-                              
-                              <!-- Já registrado -->
-                              <div class="form-group">
-                                  <p class="text-center">
-                                      <a href="#" id="btnEntrarRegistrado">
-                                          Entrar aqui.
-                                      </a>
-                                      
-                                  </p>
-                              </div>
-                      </form>
-                  </div>
-
                       </div>
-
                       
                       <!-- botão enviar -->
                       <div class="form-group">
@@ -296,23 +246,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    
-    <script>
-        
-        //$(document).ready(function(){});
-       // JQuery
-       //Esqueci a senha
-    $(function(){
-          $("#btnEsqueci").click(function(){
-              $("#caixaLogin").hide();
-              $("#caixaSenha").show();   
-          });
-             $("#btnVoltar").click(function(){
-                  $("#caixaLogin").show();
-              $("#caixaSenha").hide(); 
-
     <!-- Plugin jQuery Validate -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     
@@ -348,7 +281,6 @@
            jQuery.validator.setDefaults({
                 debug: false,
                 success: "valid"
-
               });
               
            $("#formLogin").validate();
@@ -463,120 +395,6 @@
             max: jQuery.validator.format("Por favor, forne&ccedil;a um valor menor ou igual a {0}."),
             min: jQuery.validator.format("Por favor, forne&ccedil;a um valor maior ou igual a {0}.")
         });
-
-        //Registrar o novo usuario
-        $(function(){
-          $("#btnRegistrar").click(function(){
-              $("#caixaLogin").hide();
-              $("#caixaRegistro").show();   
-          });
-            $("#btnEntrarRegistrado").click(function(){
-                 $("#caixaRegistro").hide(); 
-              $("#caixaLogin").show();
-               
-          });
-          
-         });
-             //Validação com jQuery
-                        jQuery.validator.setDefaults({
-             debug: false,
-             success: "valid"
-           });
-         $("#formLogin").validate();
-         $("#formSenha").validate();
-         $("#formRegistro").validate({
-             rules:{
-                 senhaUsuarioConfirmar:{
-                     equalTo: "#senhaUsuario"
-                 }
-                }
-         });
-         //Envio de dados via Ajax
-         //Pagina Registro de Usuario
-     $("#btnRegistroUsuario").click(function(e){
-        if(document.querySelector("#formRegistro").checkValidity()){
-        //Não deixa o formulario ser enviado
-         e.preventDefault();
-         $.ajax({
-             url:'recebe.php',
-             method:'post',
-                data:$("#formRegistro").serialize()+'&action=registro',
-                success:function(resposta){
-                    $('#alerta').show();
-                    $('#resultado').html(resposta);
-                }
-         });
-     }
-     return true;
-     });
-     //Fim do Ajax registro
-     
-     //Envio de dados via Ajax
-         //Pagina Entrar
-     $("#btnEntrar").click(function(e){
-        if(document.querySelector("#formLogin").checkValidity()){
-        //Não deixa o formulario ser enviado
-         e.preventDefault();
-         $.ajax({
-             url:'recebe.php',
-             method:'post',
-                data:$("#formLogin").serialize()+'&action=entrar',
-                success:function(resposta){
-                    $('#alerta').show();
-                    $('#resultado').html(resposta);
-                }
-         });
-     }
-     return true;
-     });
-          //Fim do Ajax Entrar
-          
-          
-           //Envio de dados via Ajax
-         //Pagina Gerar senha
-     $("#btnGerar").click(function(e){
-        if(document.querySelector("#formSenha").checkValidity()){
-        //Não deixa o formulario ser enviado
-         e.preventDefault();
-         $.ajax({
-             url:'recebe.php',
-             method:'post',
-                data:$("#formSenha").serialize()+'&action=senha',
-                success:function(resposta){
-                    $('#alerta').show();
-                    $('#resultado').html(resposta);
-                }
-         });
-     }
-     return true;
-     });
-          //Fim do Ajax Gerar Senha
-     
-     
-     
-     /*
-* Tradução padrao do jQuery
-* Locale: PT_BR
-*/
-jQuery.extend(jQuery.validator.messages, {
-    required: "Este campo &eacute; requerido.",
-    remote: "Por favor, corrija este campo.",
-    email: "Por favor, forne&ccedil;a um endere&ccedil;o eletr&ocirc;nico v&aacute;lido.",
-    url: "Por favor, forne&ccedil;a uma URL v&aacute;lida.",
-    date: "Por favor, forne&ccedil;a uma data v&aacute;lida.",
-    dateISO: "Por favor, forne&ccedil;a uma data v&aacute;lida (ISO).",
-    number: "Por favor, forne&ccedil;a um n&uacute;mero v&aacute;lido.",
-    digits: "Por favor, forne&ccedil;a somente d&iacute;gitos.",
-    creditcard: "Por favor, forne&ccedil;a um cart&atilde;o de cr&eacute;dito v&aacute;lido.",
-    equalTo: "Por favor, forne&ccedil;a o mesmo valor novamente.",
-    accept: "Por favor, forne&ccedil;a um valor com uma extens&atilde;o v&aacute;lida.",
-    maxlength: jQuery.validator.format("Por favor, forne&ccedil;a n&atilde;o mais que {0} caracteres."),
-    minlength: jQuery.validator.format("Por favor, forne&ccedil;a ao menos {0} caracteres."),
-    rangelength: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1} caracteres de comprimento."),
-    range: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1}."),
-    max: jQuery.validator.format("Por favor, forne&ccedil;a um valor menor ou igual a {0}."),
-    min: jQuery.validator.format("Por favor, forne&ccedil;a um valor maior ou igual a {0}.")
-});
     </script>
   </body>
 </html>

@@ -1,8 +1,3 @@
-
-<?php
-
-var_dump($_POST);
-
 <?php //início de um script PHP
  session_start();//inicialização da sessão
  //Memória de Login entre todos as páginas
@@ -36,9 +31,9 @@ if(isset($_POST['action'])
         $_SESSION['nomeUsuario'] = $nomeUsuário;
         echo 'ok';
         
-        if(!empty($_POST['checkLembrar'])){
+        if(!empty($_POST['lembrar'])){
             setcookie('nomeUsuario', $nomeUsuário, time()+(365*24*60*60));// 1 ano de vida do cookie em segundos
-            setcookie('senhaUsuario', $senha, time()+(365*24*60*60));// 1 ano de vida do cookie em segundos
+            setcookie('senhaUsuario', $senhaUsuário, time()+(365*24*60*60));// 1 ano de vida do cookie em segundos
         }else{
             //Limpa o cookie 
             if (isset($_COOKIE['nomeUsuario'])){
@@ -61,7 +56,7 @@ if(isset($_POST['action'])
     $emailUsuário = verificar_entrada($_POST['emailUsuario']);
     $senhaUsuário = verificar_entrada($_POST['senhaUsuario']);
     $senhaUsuárioConfirmar = verificar_entrada($_POST['senhaUsuarioConfirmar']);
-    $criado = date("Y-m-d"); //Cria uma data Ano-mês-dia
+    $criado = date("Y-m-d H:i:s"); //Cria uma data Ano-mês-dia
     
     //Gerar um hash para as senhas
     $senha = sha1($senhaUsuário);
@@ -89,6 +84,7 @@ if(isset($_POST['action'])
         elseif($linha['email'] == $emailUsuário)
             echo "E-mail {$emailUsuário} indisponível.";            
         else{
+            
             //Preparar a inserção no Banco de dados
             $sql = 
                 $conexão->prepare("INSERT INTO usuario "
