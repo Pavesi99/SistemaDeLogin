@@ -22,7 +22,8 @@
     <style>
         #alerta,
         #caixaRegistro,
-        #caixaSenha{
+        #caixaSenha,
+        #espera{
             display: none;
         }  
     </style>
@@ -41,6 +42,12 @@
               </div>
           </section>
           
+          <!-- SPINNER de Espera -->
+          <div class="col-lg-4 offset-lg-4 text-center mb-4">
+              <div class="spinner-grow text-primary" role="status" id="espera">
+  <span class="sr-only">Esperando...</span>
+            </div>
+          </div>
           <!-- Formulário de Login -->
           <section class="row">
               <div class="col-lg-4 offset-lg-4 bg-light rounded"
@@ -302,12 +309,14 @@
                         .checkValidity()){
                     //Não deixa o formulário ser enviado    
                     e.preventDefault();
+                    $("#espera").show();
                     $.ajax({
                         url: 'recebe.php',
                         method: 'post',
                         data:$('#formRegistro')
                                 .serialize()+'&action=registro',
                         success:function(resposta){
+                            $("#espera").hide();
                             $('#alerta').show();
                             $('#resultado').html(resposta);
                         }                    
@@ -325,12 +334,16 @@
                         .checkValidity()){
                     //Não deixa o formulário ser enviado    
                     e.preventDefault();
+                   $("#espera").show();
+                       
                     $.ajax({
                         url: 'recebe.php',
                         method: 'post',
                         data:$('#formLogin')
                                 .serialize()+'&action=entrar',
-                        success:function(resposta){   
+                        success:function(resposta){  
+                   $("#espera").hide();
+
                             if(resposta === "ok"){
                                 window.location = "perfil.php";
                         }else{
@@ -353,12 +366,14 @@
                         .checkValidity()){
                     //Não deixa o formulário ser enviado    
                     e.preventDefault();
+                     $("#espera").show();
                     $.ajax({
                         url: 'recebe.php',
                         method: 'post',
                         data:$('#formSenha')
                                 .serialize()+'&action=gerar',
                         success:function(resposta){
+                            $("#espera").hide();
                             $('#alerta').show();
                             $('#resultado').html(resposta);
                         }                    
