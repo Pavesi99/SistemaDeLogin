@@ -1,6 +1,8 @@
 <?php //início de um script PHP
  session_start();//inicialização da sessão
  //Memória de Login entre todos as páginas
+
+ 
 //Importando as configurações de Banco de Dados
 require_once 'configDB.php';
 
@@ -102,7 +104,32 @@ if(isset($_POST['action'])
         && $_POST['action'] == 'gerar'){
     $emailGerarSenha = verificar_entrada($_POST['emailGerarSenha']);
     
-    echo $emailGerarSenha;
+    $sql = $conexão->prepare("SELECT idUsuario FROM usuario WHERE email = ?;");
+    
+    $sql->bind_param("s",$emailGerarSenha);
+    $sql->execute();
+    $resposta = $sql->get_result();
+    if($resposta->num_rows > 0){ #Email existe no Banco de dados
+        #Geração do token, 10 caracteres aleatorios
+        $frase = "dwad234e3ffa3r534r543g4324gwefqdq2e245t4fswr243a1e23erd342r23r";
+        $palavra_secreta = str_shuffle($frase);
+        $token = substr($palavra_secreta,0,10);
+        
+        //Atualização do banco de dados, passando o token e a validade
+        $sql = $conexão->prepare("UPDATE usuario SET token = ?, tokenExpirado=DATE_ADD(now(), INTERVAL 5 MINUTE) WHERE email=?;");
+        $sql->bind_param("ss", $token, $emailGerarSenha);
+        $sql->execute();
+        
+        #Simulação do envio do e-mail
+        #O codigo abaixo deveria ser enviado por e-mail
+        
+        $link = "<p ><a href='http://localhost:8080/sistemaDeLogin/gerarSenha.php?email=$emailGerarSenha&token=$token'>Clique aqui</a> para gerar uma nova senha.</p>";
+        echo $link;
+        
+    }else{ #Email não existe
+        echo "<strong class='text-danger'>E-mail não ENCONTRADO</strong>";
+    }
+    
         }else {
     
    header("location:index.php"); //redireciona ao acessar este arquivo diretamente
